@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <title>Quotes</title>
+</head>
+<body>
+    <a href="/logout">Logout</a>
+    <h5>Welcome, {{request.session.user_name}}</h5>
+    {{ context }}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p>Quotable Quotes</p>
+                {% for quote in quotable %}
+                <p>{{quote.author}}: {{quote.quote}}</p>
+                <p>Posted by <a href="users/{{quote.posted_by.id}}">{{quote.posted_by.name}}</a> <button><a href="/addquote/{{quote.id}}">Add to My list</a></button></p>
+                {% endfor %}
+            </div>
+            <div class="col">
+                <p>Your Favorites</p>
+                {% for quote in favorites %}
+                <p>{{quote.author}}: {{quote.quote}}</p>
+                <p>Posted by <a href="users/{{quote.user_id}}">{{quote.posted_by.name}}</a> <button><a href="/removequote/{{quote.id}}">Remove from my list</a></button></p>
+                {% endfor %}
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <p>Contribute a quote:</p>
+                <form action="/post_quote" method="post">
+                {% csrf_token %}
+                <p>Author: <input type="text" name="author"></p>
+                <p>Message: <input type="text" name="quotes"></p>
+                <p><input type="submit" value="Submit"></p>
+                </form>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

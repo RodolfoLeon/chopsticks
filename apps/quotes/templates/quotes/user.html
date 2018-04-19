@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <title>Quotes</title>
+</head>
+<body>
+    <a href="/dashboard">Dashboard</a> | <a href="/logout">Logout</a>
+    <p>Posts by {{poster.name}}</p>
+    <p>Count: {{count}}</p>
+    {% for quote in posted %}
+    <p>{{quote.author}}: {{quote.quote}}</p>
+    {% endfor %}
+</body>
+</html>
